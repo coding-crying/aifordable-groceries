@@ -1,0 +1,127 @@
+# AIFordable Groceries: Flexible POC Development Plan
+
+## Project Overview
+Build an interactive POC demonstrating the AIfordable Groceries core value proposition using OpenAI Real-Time Agents. This is NOT a production application - it's a compelling demonstration to validate technical feasibility and secure buy-in for full production development.
+
+## Success Criteria
+- Demonstrate viable cost-optimization engine
+- Justify $20-$40 monthly subscription model
+- Achieve "wow factor" for stakeholder buy-in
+- Validate technical feasibility of real-time conversational commerce
+
+## Technology Stack
+- Backend: Node.js/TypeScript (OpenAI Real-Time Agents base)
+- Frontend: React/Next.js
+- Communication: WebSocket (real-time)
+- APIs: OpenAI Realtime API, MealMe API, Nutrition API (Spoonacular/Edamam)
+- Future: PostgreSQL for user memory
+
+## Development Phases
+
+### Phase 0: Foundation & Familiarization
+**Objective**: Establish stable development environment and understand demo architecture
+
+**Key Tasks**:
+- Clone openai-realtime-agents-demo repository
+- Configure environment variables (OPENAI_API_KEY)
+- Run demo locally and confirm functionality
+- Study codebase architecture:
+  - Agent definition patterns
+  - Tool definition and integration
+  - WebSocket connection handling
+  - Message flow and streaming events
+
+**Success Metric**: Explain end-to-end data flow and run demo reliably
+
+### Phase 1: Core Backend Logic Implementation
+**Objective**: Replace generic demo tools with AIfordable Groceries business logic
+
+**Key Tools to Implement**:
+
+1. **Nutrition Tool**
+   - Function: `getRecipes(preferences: {dietary_needs: string[], nutrient_focus: string[], cook_time_max_minutes: number})`
+   - Initial: Return 2-3 hardcoded recipes with prep_time, cook_time, tools_needed
+   - Define tool schema for OpenAI agent
+
+2. **Commerce Tools**
+   - Function: `getGroceryPrices(ingredients: string[], location: string)`
+   - Function: `optimizeCart(priceData: PriceData, budget: number)`
+   - Initial: Mocked price data for 2+ fictional stores
+   - POC optimization: Simple heuristic showing multi-store cost optimization
+
+**Success Metric**: Agent responds to "Find me cheap vegan meals under 30 minutes" by calling correct functions in sequence
+
+### Phase 2: Frontend Transformation
+**Objective**: Transform generic UI into branded AIfordable Groceries interface
+
+**Key Tasks**:
+- Implement AIfordable Groceries branding (colors, typography, logo)
+- Create hybrid input with preference buttons (High Protein, Quick Meals, Vegetarian)
+- Build rich content renderers:
+  - RecipeCard component (image, title, prep/cook time, tools needed)
+  - OptimizedCart component (grouped by store, prices, totals)
+
+**Success Metric**: Branded, intuitive interface showing formatted recipes and multi-store shopping lists
+
+### Phase 3: End-to-End Integration
+**Objective**: Create seamless user flow demonstrating full value proposition
+
+**Key Tasks**:
+- Craft detailed system prompt defining agent persona and workflow
+- Integrate live APIs (Nutrition API, MealMe API)
+- Implement real-time status updates during API calls
+- Define "Golden Path" demonstration flow
+
+**Golden Path Example**: 
+User requests $100 budget, high-protein vegan meals for 2 people → Agent presents 3 recipes → User selects one → Agent returns optimized cart from 2 stores totaling $92.50
+
+**Success Metric**: Stakeholder can use application without instruction to generate cost-optimized grocery list
+
+## Core Features
+
+### MVP Functionality
+- Real-time conversational interface
+- Recipe recommendation based on preferences
+- Multi-store price comparison
+- Cart optimization algorithm
+- Branded user experience
+
+### Future Enhancements (Post-POC)
+- PostgreSQL database integration
+- User feedback loop system
+- Order history tracking
+- Advanced personalization engine
+- Subscription ROI tracking
+
+## Technical Requirements
+
+### Backend Requirements
+- OpenAI Real-Time API integration
+- Custom tool definitions for nutrition and commerce
+- Mocked data initially, live API integration in Phase 3
+- Streaming status updates
+
+### Frontend Requirements
+- React/Next.js components
+- WebSocket connection management
+- Rich data visualization
+- Responsive design
+- Preference input controls
+
+### API Integrations
+- OpenAI Realtime API (core)
+- MealMe API (grocery prices)
+- Nutrition API (recipes - Spoonacular or Edamam)
+
+## Business Value Proposition
+- Demonstrate cost optimization engine effectiveness
+- Show real-time conversational commerce viability
+- Validate subscription model through cumulative savings display
+- Prove technical feasibility for full production investment
+
+## Constraints & Assumptions
+- POC focus: Speed and demonstration over production quality
+- Simplified optimization algorithm acceptable for demonstration
+- One perfect user journey preferred over multiple partial flows
+- Mocked data acceptable in early phases
+- Live API integration required for final phase only

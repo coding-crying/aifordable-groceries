@@ -27,12 +27,14 @@ import { chatSupervisorScenario } from "@/app/agentConfigs/chatSupervisor";
 import { customerServiceRetailCompanyName } from "@/app/agentConfigs/customerServiceRetail";
 import { chatSupervisorCompanyName } from "@/app/agentConfigs/chatSupervisor";
 import { simpleHandoffScenario } from "@/app/agentConfigs/simpleHandoff";
+import { aifordableGroceriesScenario } from "@/app/agentConfigs/aifordableGroceries";
 
 // Map used by connect logic for scenarios defined via the SDK.
 const sdkScenarioMap: Record<string, RealtimeAgent[]> = {
   simpleHandoff: simpleHandoffScenario,
   customerServiceRetail: customerServiceRetailScenario,
   chatSupervisor: chatSupervisorScenario,
+  aifordableGroceries: aifordableGroceriesScenario,
 };
 
 import useAudioDownload from "./hooks/useAudioDownload";
@@ -214,6 +216,8 @@ function App() {
 
         const companyName = agentSetKey === 'customerServiceRetail'
           ? customerServiceRetailCompanyName
+          : agentSetKey === 'aifordableGroceries'
+          ? 'AIFordable Groceries'
           : chatSupervisorCompanyName;
         const guardrail = createModerationGuardrail(companyName);
 
@@ -449,7 +453,7 @@ function App() {
             />
           </div>
           <div>
-            Realtime API <span className="text-gray-500">Agents</span>
+            AIFordable <span className="text-green-600">Groceries</span>
           </div>
         </div>
         <div className="flex items-center">
