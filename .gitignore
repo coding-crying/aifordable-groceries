@@ -1,12 +1,10 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
 # dependencies
 /node_modules
 /.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+.pnp.js
+.yarn/install-state.gz
 
 # testing
 /coverage
@@ -26,11 +24,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
 
-# Ignore all env files except .env.sample
+# local env files
+.env*.local
 .env
-
 
 # vercel
 .vercel
@@ -38,5 +35,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-todo.md
 
+# Database
+dev.db
+dev.db-journal
+
+# Prisma
+/src/generated/prisma/node_modules/
+
+# Development notes and scratchpads
+/scratchpads/*.md
+/claude/
+
+# IDE
+.vscode/
+.idea/

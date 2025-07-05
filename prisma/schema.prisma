@@ -1,0 +1,162 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Profile information
+  name           String?
+  email          String?  @unique
+  zipCode        String?
+  familySize     Int      @default(1)
+  weeklyBudget   Float?
+
+  // Preferences and restrictions
+  preferences UserPreferences?
+  allergies   UserAllergy[]
+  fridgeItems FridgeItem[]
+  favorites   UserFavorite[]
+  shoppingHistory ShoppingSession[]
+
+  @@map("users")
+}
+
+model UserPreferences {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Dietary preferences (stored as JSON strings in SQLite)
+  dietaryRestrictions String   @default("[]") // JSON: ["vegetarian", "vegan", "gluten-free", "keto", etc.]
+  cuisinePreferences  String   @default("[]") // JSON: ["italian", "mexican", "asian", etc.]
+  nutritionFocus      String?  // "high-protein", "low-carb", "balanced", "low-sodium"
+  
+  // Cooking preferences
+  maxCookTime         Int      @default(60) // minutes
+  maxPrepTime         Int      @default(30) // minutes
+  skillLevel          String   @default("intermediate") // "beginner", "intermediate", "advanced"
+  equipmentAvailable  String   @default("[]") // JSON: ["slow_cooker", "instant_pot", "air_fryer", etc.]
+  
+  // Shopping preferences
+  preferredStores     String   @default("[]") // JSON: store names/types
+  maxStores           Int      @default(2) // max stores willing to visit
+  bulkBuyingOk        Boolean  @default(true)
+  organicPreference   String   @default("mixed") // "required", "preferred", "mixed", "avoid"
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("user_preferences")
+}
+
+model UserAllergy {
+  id       String @id @default(cuid())
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  allergen String // "peanuts", "shellfish", "dairy", etc.
+  severity String // "mild", "moderate", "severe"
+  
+  createdAt DateTime @default(now())
+
+  @@map("user_allergies")
+}
+
+model FridgeItem {
+  id             String    @id @default(cuid())
+  userId         String
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  itemName       String
+  brand          String?
+  quantity       Float
+  unit           String    // "lbs", "oz", "cups", "pieces", etc.
+  expirationDate DateTime?
+  category       String?   // "produce", "dairy", "meat", "pantry", etc.
+  
+  addedDate    DateTime @default(now())
+  lastUpdated  DateTime @updatedAt
+
+  @@map("fridge_items")
+}
+
+model UserFavorite {
+  id       String @id @default(cuid())
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  type     String // "recipe", "store", "product"
+  itemId   String // could be recipe ID, store name, product name
+  itemName String
+  notes    String?
+  
+  createdAt DateTime @default(now())
+
+  @@unique([userId, type, itemId])
+  @@map("user_favorites")
+}
+
+model ShoppingSession {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  sessionDate  DateTime @default(now())
+  totalBudget  Float?
+  totalSpent   Float?
+  totalSavings Float?
+  
+  recipes      SessionRecipe[]
+  shoppingList ShoppingListItem[]
+  
+  notes        String?
+  completed    Boolean  @default(false)
+
+  @@map("shopping_sessions")
+}
+
+model SessionRecipe {
+  id               String          @id @default(cuid())
+  shoppingSessionId String
+  shoppingSession  ShoppingSession @relation(fields: [shoppingSessionId], references: [id], onDelete: Cascade)
+  
+  recipeName       String
+  recipeId         String?
+  servings         Int
+  costPerServing   Float?
+  selectedDate     DateTime?
+  
+  @@map("session_recipes")
+}
+
+model ShoppingListItem {
+  id               String          @id @default(cuid())
+  shoppingSessionId String
+  shoppingSession  ShoppingSession @relation(fields: [shoppingSessionId], references: [id], onDelete: Cascade)
+  
+  itemName         String
+  quantity         Float
+  unit             String
+  estimatedCost    Float?
+  actualCost       Float?
+  store            String?
+  brand            String?
+  
+  purchased        Boolean @default(false)
+  substituted      Boolean @default(false)
+  substitutionNotes String?
+
+  @@map("shopping_list_items")
+}
