@@ -1,0 +1,46 @@
+{
+  "id": "epic-2-1",
+  "title": "Epic 2.1: Recipe Discovery Tool Implementation",
+  "description": "Implement the 'brain' of the application starting with the recipe discovery tool that will serve as the entry point for the user journey.",
+  "status": "pending",
+  "priority": "high",
+  "tags": ["backend", "recipe", "tools", "epic"],
+  "createdAt": "2025-07-09T03:58:00.000Z",
+  "updatedAt": "2025-07-09T03:58:00.000Z",
+  "githubIssue": {
+    "number": 3,
+    "url": "https://github.com/coding-crying/aifordable-groceries/issues/3"
+  },
+  "subtasks": [
+    {
+      "id": "2.1.1",
+      "title": "Define TypeScript interfaces for Recipe and RecipePreferences",
+      "status": "pending",
+      "acceptance_criteria": "Interfaces created with fields for dietary_needs, nutrient_focus, cook_time_max_minutes, prep_time, tools_needed"
+    },
+    {
+      "id": "2.1.2",
+      "title": "Implement mocked getRecipes(preferences) function", 
+      "status": "pending",
+      "acceptance_criteria": "Function returns hardcoded array of 2-3 Recipe objects when called"
+    },
+    {
+      "id": "2.1.3",
+      "title": "Define JSON schema for getRecipes tool for OpenAI API",
+      "status": "pending",
+      "acceptance_criteria": "Schema accurately describes function purpose and all input parameters"
+    },
+    {
+      "id": "2.1.4",
+      "title": "Integrate getRecipes tool into main agent definition file",
+      "status": "pending",
+      "acceptance_criteria": "Server compiles and runs with new tool integrated"
+    },
+    {
+      "id": "2.1.5",
+      "title": "Add nutrition scoring and cost analysis to recipe responses",
+      "status": "pending",
+      "acceptance_criteria": "Each recipe includes nutritional score, estimated cost per serving, cost per gram of protein"
+    }
+  ]
+}

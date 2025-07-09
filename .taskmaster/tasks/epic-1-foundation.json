@@ -1,0 +1,40 @@
+{
+  "id": "epic-1-foundation",
+  "title": "Epic 1: Project Foundation & Environment Setup",
+  "description": "Establish a stable foundation for the AIFordable Groceries POC by setting up the OpenAI demo environment and securing necessary API access.",
+  "status": "in_progress",
+  "priority": "critical",
+  "tags": ["foundation", "setup", "epic"],
+  "createdAt": "2025-07-09T03:58:00.000Z",
+  "updatedAt": "2025-07-09T03:58:00.000Z",
+  "githubIssue": {
+    "number": 5,
+    "url": "https://github.com/coding-crying/aifordable-groceries/issues/5"
+  },
+  "subtasks": [
+    {
+      "id": "1.0.1",
+      "title": "Clone openai-realtime-agents-demo repository",
+      "status": "completed",
+      "acceptance_criteria": "Repository successfully cloned to local development machine"
+    },
+    {
+      "id": "1.0.2",
+      "title": "Install dependencies and configure OPENAI_API_KEY",
+      "status": "completed",
+      "acceptance_criteria": "Application successfully authenticates with OpenAI API"
+    },
+    {
+      "id": "1.0.3",
+      "title": "Verify end-to-end functionality with test conversation",
+      "status": "pending",
+      "acceptance_criteria": "Agent responds to test conversation correctly"
+    },
+    {
+      "id": "1.0.4",
+      "title": "Document setup process for team",
+      "status": "pending",
+      "acceptance_criteria": "Clear documentation available for team members"
+    }
+  ]
+}

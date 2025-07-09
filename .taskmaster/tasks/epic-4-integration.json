@@ -1,0 +1,46 @@
+{
+  "id": "epic-4-integration",
+  "title": "Epic 4: Live API Integration & Golden Path Demo",
+  "description": "Replace mock data with live APIs and create a reliable demonstration flow that consistently shows 20-30% grocery savings.",
+  "status": "pending",
+  "priority": "high",
+  "tags": ["integration", "api", "demo", "epic"],
+  "createdAt": "2025-07-09T03:58:00.000Z",
+  "updatedAt": "2025-07-09T03:58:00.000Z",
+  "githubIssue": {
+    "number": 8,
+    "url": "https://github.com/coding-crying/aifordable-groceries/issues/8"
+  },
+  "subtasks": [
+    {
+      "id": "4.0.1",
+      "title": "Write Maya AI agent system prompt positioning as sassy grocery optimization expert",
+      "status": "pending",
+      "acceptance_criteria": "Agent leads with dollar amounts and maintains engaging personality"
+    },
+    {
+      "id": "4.0.2",
+      "title": "Replace getRecipes() mock with Spoonacular or Edamam API",
+      "status": "pending",
+      "acceptance_criteria": "Live recipe data integrated with 7-day caching layer"
+    },
+    {
+      "id": "4.0.3",
+      "title": "Implement MealMe API complete integration",
+      "status": "pending",
+      "acceptance_criteria": "Real store discovery, product search, and price aggregation"
+    },
+    {
+      "id": "4.0.4",
+      "title": "Create golden path demo scenario optimization",
+      "status": "pending",
+      "acceptance_criteria": "Family of 4, $150/week budget, 22-28% savings consistently achieved"
+    },
+    {
+      "id": "4.0.5",
+      "title": "Implement robust error handling and fallback mechanisms",
+      "status": "pending",
+      "acceptance_criteria": "Graceful degradation to cached/mock data when APIs fail"
+    }
+  ]
+}

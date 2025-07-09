@@ -1,0 +1,52 @@
+{
+  "id": "epic-2-2",
+  "title": "Epic 2.2: Commerce Tools - Grocery Pricing & Cart Optimization",
+  "description": "Build the core commerce functionality that finds, prices, and optimizes grocery purchases using the MealMe API integration approach.",
+  "status": "pending",
+  "priority": "high",
+  "tags": ["backend", "commerce", "optimization", "epic"],
+  "createdAt": "2025-07-09T03:58:00.000Z",
+  "updatedAt": "2025-07-09T03:58:00.000Z",
+  "githubIssue": {
+    "number": 4,
+    "url": "https://github.com/coding-crying/aifordable-groceries/issues/4"
+  },
+  "subtasks": [
+    {
+      "id": "2.2.1",
+      "title": "Define TypeScript interfaces for Store, Product, PriceData, and OptimizedCart",
+      "status": "pending",
+      "acceptance_criteria": "Interfaces accurately model data structures for stores, products with prices, shopping lists"
+    },
+    {
+      "id": "2.2.2",
+      "title": "Define GroceryItem interface with standardization logic",
+      "status": "pending",
+      "acceptance_criteria": "Handle ingredient → grocery product mapping (e.g., '2 cups flour' → 'All-Purpose Flour 5lb bag')"
+    },
+    {
+      "id": "2.2.3",
+      "title": "Implement mocked findAndPriceGroceries(ingredients, location) function",
+      "status": "pending",
+      "acceptance_criteria": "Orchestrates store search, product search, and price aggregation"
+    },
+    {
+      "id": "2.2.4",
+      "title": "Create mocked searchStores(location) sub-function",
+      "status": "pending",
+      "acceptance_criteria": "Returns 2-3 fictional local grocery stores with realistic details"
+    },
+    {
+      "id": "2.2.5",
+      "title": "Implement optimizeCart(priceData, budget) heuristic algorithm",
+      "status": "pending",
+      "acceptance_criteria": "Takes PriceData object and returns OptimizedCart minimizing total cost"
+    },
+    {
+      "id": "2.2.6",
+      "title": "Define JSON schemas for findAndPriceGroceries and optimizeCart tools",
+      "status": "pending",
+      "acceptance_criteria": "Schemas describe purpose and parameters of both functions accurately"
+    }
+  ]
+}

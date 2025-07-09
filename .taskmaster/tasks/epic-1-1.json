@@ -1,0 +1,40 @@
+{
+  "id": "epic-1-1",
+  "title": "Epic 1.1: Development Environment Setup & Demo Understanding",
+  "description": "Establish a stable foundation for the AIFordable Groceries POC by setting up the OpenAI demo environment and understanding the existing architecture.",
+  "status": "pending",
+  "priority": "high",
+  "tags": ["foundation", "setup", "epic"],
+  "createdAt": "2025-07-09T03:58:00.000Z",
+  "updatedAt": "2025-07-09T03:58:00.000Z",
+  "githubIssue": {
+    "number": 1,
+    "url": "https://github.com/coding-crying/aifordable-groceries/issues/1"
+  },
+  "subtasks": [
+    {
+      "id": "1.1.1",
+      "title": "Clone the official openai-realtime-agents-demo repository from GitHub",
+      "status": "pending",
+      "acceptance_criteria": "Repository successfully cloned to local development machine"
+    },
+    {
+      "id": "1.1.2", 
+      "title": "Install all npm dependencies for both backend and frontend",
+      "status": "pending",
+      "acceptance_criteria": "npm install completes without errors in both directories"
+    },
+    {
+      "id": "1.1.3",
+      "title": "Create and configure .env file with OPENAI_API_KEY",
+      "status": "pending", 
+      "acceptance_criteria": "Application successfully authenticates with OpenAI API"
+    },
+    {
+      "id": "1.1.4",
+      "title": "Launch application and verify end-to-end functionality",
+      "status": "pending",
+      "acceptance_criteria": "Backend starts, frontend accessible, test conversation completes successfully"
+    }
+  ]
+}

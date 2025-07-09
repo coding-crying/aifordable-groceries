@@ -1,0 +1,46 @@
+{
+  "id": "epic-2-backend",
+  "title": "Epic 2: Backend Implementation - Recipe Discovery & Commerce Tools",
+  "description": "Build the core AIFordable Groceries functionality by implementing custom tools for recipe discovery, grocery pricing, and cart optimization using the OpenAI Agents SDK.",
+  "status": "pending",
+  "priority": "high",
+  "tags": ["backend", "tools", "epic"],
+  "createdAt": "2025-07-09T03:58:00.000Z",
+  "updatedAt": "2025-07-09T03:58:00.000Z",
+  "githubIssue": {
+    "number": 6,
+    "url": "https://github.com/coding-crying/aifordable-groceries/issues/6"
+  },
+  "subtasks": [
+    {
+      "id": "2.0.1",
+      "title": "Define Recipe and RecipePreferences TypeScript interfaces",
+      "status": "pending",
+      "acceptance_criteria": "Interfaces created with cost-per-serving, nutrition facts, ingredient list"
+    },
+    {
+      "id": "2.0.2",
+      "title": "Implement getRecipes() function with realistic mock data",
+      "status": "pending",
+      "acceptance_criteria": "Returns 15-20 diverse recipes with cost calculations"
+    },
+    {
+      "id": "2.0.3",
+      "title": "Create OpenAI tool schema for agent integration",
+      "status": "pending",
+      "acceptance_criteria": "Schema properly integrated into agent configuration"
+    },
+    {
+      "id": "2.0.4",
+      "title": "Implement ingredient → grocery product mapping with unit conversions",
+      "status": "pending",
+      "acceptance_criteria": "Handles conversion from recipe units to grocery products"
+    },
+    {
+      "id": "2.0.5",
+      "title": "Build optimizeCart() algorithm with multi-store optimization",
+      "status": "pending",
+      "acceptance_criteria": "Algorithm demonstrates 20-30% savings vs single store"
+    }
+  ]
+}

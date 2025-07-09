@@ -1,0 +1,40 @@
+{
+  "id": "epic-1-2",
+  "title": "Epic 1.2: External API Access & Integration Planning",
+  "description": "Secure access to external APIs and plan integration approach for live data in the AIFordable Groceries POC.",
+  "status": "pending",
+  "priority": "high",
+  "tags": ["api", "integration", "epic"],
+  "createdAt": "2025-07-09T03:58:00.000Z",
+  "updatedAt": "2025-07-09T03:58:00.000Z",
+  "githubIssue": {
+    "number": 2,
+    "url": "https://github.com/coding-crying/aifordable-groceries/issues/2"
+  },
+  "subtasks": [
+    {
+      "id": "1.3.1",
+      "title": "Submit API key request through official MealMe website",
+      "status": "pending",
+      "acceptance_criteria": "Request form submitted successfully"
+    },
+    {
+      "id": "1.3.2",
+      "title": "Receive API key and review developer documentation",
+      "status": "pending",
+      "acceptance_criteria": "API key securely stored, team understands rate limits and authentication"
+    },
+    {
+      "id": "1.3.3",
+      "title": "Test basic MealMe API connectivity",
+      "status": "pending",
+      "acceptance_criteria": "Successfully make test API calls to verify access"
+    },
+    {
+      "id": "1.3.4",
+      "title": "Document MealMe API capabilities and limitations",
+      "status": "pending",
+      "acceptance_criteria": "Clear documentation of available endpoints, geographic coverage, data structure"
+    }
+  ]
+}
