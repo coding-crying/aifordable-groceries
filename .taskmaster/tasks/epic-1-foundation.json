@@ -35,6 +35,12 @@
       "title": "Document setup process for team",
       "status": "pending",
       "acceptance_criteria": "Clear documentation available for team members"
+    },
+    {
+      "id": "1.0.5",
+      "title": "Initialize taskmaster project management system",
+      "status": "completed",
+      "acceptance_criteria": "Taskmaster configured with all GitHub issues imported as structured tasks"
     }
   ]
 }

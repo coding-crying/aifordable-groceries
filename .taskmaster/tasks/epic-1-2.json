@@ -2,11 +2,11 @@
   "id": "epic-1-2",
   "title": "Epic 1.2: External API Access & Integration Planning",
   "description": "Secure access to external APIs and plan integration approach for live data in the AIFordable Groceries POC.",
-  "status": "pending",
+  "status": "in_progress",
   "priority": "high",
   "tags": ["api", "integration", "epic"],
   "createdAt": "2025-07-09T03:58:00.000Z",
-  "updatedAt": "2025-07-09T03:58:00.000Z",
+  "updatedAt": "2025-07-10T04:06:00.000Z",
   "githubIssue": {
     "number": 2,
     "url": "https://github.com/coding-crying/aifordable-groceries/issues/2"
