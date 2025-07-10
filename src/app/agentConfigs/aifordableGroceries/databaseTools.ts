@@ -7,11 +7,10 @@ import {
   addFridgeItem,
   getFridgeItems,
   removeFridgeItem,
-  addUserFavorite,
-  getUserFavorites,
   createShoppingSession,
   parseJsonArray,
 } from '../../lib/db';
+import { recipeApiClient, Recipe } from '../../lib/recipeApiClient';
 
 // User Management Tool
 export const manageUserProfile = tool({
@@ -357,69 +356,133 @@ export const getSmartRecipeRecommendations = tool({
       const dietaryRestrictions = preferences ? parseJsonArray(preferences.dietaryRestrictions) : [];
       const cuisinePrefs = preferences ? parseJsonArray(preferences.cuisinePreferences) : [];
       
-      // Mock recipe data enhanced with user context
-      const mockRecipes = [
-        {
-          id: "recipe-1",
-          name: "Budget Chicken Stir Fry",
-          description: "Quick and nutritious stir fry using affordable ingredients",
-          ingredients: ["chicken thighs", "frozen mixed vegetables", "rice", "soy sauce", "garlic"],
-          servings: 4,
-          prepTime: "20 minutes",
-          estimatedCost: 8.50,
-          costPerServing: 2.13,
-          nutrition: {
-            calories: 420,
-            protein: "28g",
-            carbs: "45g",
-            fat: "12g"
-          },
-          dietaryTags: [],
-          cuisineType: "asian",
-          difficulty: "easy"
-        },
-        {
-          id: "recipe-2", 
-          name: "Lentil Vegetable Soup",
-          description: "Hearty and protein-rich soup perfect for meal prep",
-          ingredients: ["red lentils", "carrots", "onions", "celery", "vegetable broth", "canned tomatoes"],
-          servings: 6,
-          prepTime: "30 minutes",
-          estimatedCost: 6.25,
-          costPerServing: 1.04,
-          nutrition: {
-            calories: 280,
-            protein: "18g",
-            carbs: "48g",
-            fat: "2g"
-          },
-          dietaryTags: ["vegetarian", "vegan"],
-          cuisineType: "american",
-          difficulty: "easy"
-        },
-        {
-          id: "recipe-3",
-          name: "Black Bean Quesadillas",
-          description: "Protein-packed and budget-friendly Mexican-inspired meal",
-          ingredients: ["black beans", "tortillas", "cheese", "bell peppers", "onions", "cumin"],
-          servings: 3,
-          prepTime: "15 minutes", 
-          estimatedCost: 5.75,
-          costPerServing: 1.92,
-          nutrition: {
-            calories: 380,
-            protein: "16g",
-            carbs: "52g",
-            fat: "14g"
-          },
-          dietaryTags: ["vegetarian"],
-          cuisineType: "mexican",
-          difficulty: "easy"
+      // Fetch real recipes from API with fallback to mock data
+      let recipes: Recipe[] = [];
+      let usingApiData = false;
+      
+      try {
+        // Search for recipes using the API with user preferences
+        const apiRecipes = await recipeApiClient.searchRecipes({
+          dietaryRestrictions,
+          cuisineTypes: cuisinePrefs,
+          ingredients: fridgeIngredients.length > 0 ? fridgeIngredients.slice(0, 3) : undefined, // Use top 3 fridge items
+          maxResults: 15,
+          maxReadyTime: preferences?.maxPrepTime || undefined,
+        });
+
+        if (apiRecipes.length > 0) {
+          console.log(`Found ${apiRecipes.length} recipes from Spoonacular API`);
+          recipes = apiRecipes;
+          usingApiData = true;
+        } else {
+          console.log('No recipes found from API, using fallback data');
+          throw new Error('No API recipes found');
         }
-      ];
+      } catch (error) {
+        console.warn('Recipe API failed, falling back to mock data:', error);
+        
+        // Fallback to enhanced mock data when API fails
+        recipes = [
+          {
+            id: "recipe-1",
+            name: "Budget Chicken Stir Fry",
+            description: "Quick and nutritious stir fry using affordable ingredients",
+            ingredients: ["chicken thighs", "frozen mixed vegetables", "rice", "soy sauce", "garlic"],
+            servings: 4,
+            prepTime: "20 minutes",
+            estimatedCost: 8.50,
+            costPerServing: 2.13,
+            nutrition: {
+              calories: 420,
+              protein: "28g",
+              carbs: "45g",
+              fat: "12g"
+            },
+            dietaryTags: [],
+            cuisineType: "asian",
+            difficulty: "easy"
+          },
+          {
+            id: "recipe-2", 
+            name: "Lentil Vegetable Soup",
+            description: "Hearty and protein-rich soup perfect for meal prep",
+            ingredients: ["red lentils", "carrots", "onions", "celery", "vegetable broth", "canned tomatoes"],
+            servings: 6,
+            prepTime: "30 minutes",
+            estimatedCost: 6.25,
+            costPerServing: 1.04,
+            nutrition: {
+              calories: 280,
+              protein: "18g",
+              carbs: "48g",
+              fat: "2g"
+            },
+            dietaryTags: ["vegetarian", "vegan"],
+            cuisineType: "american",
+            difficulty: "easy"
+          },
+          {
+            id: "recipe-3",
+            name: "Black Bean Quesadillas",
+            description: "Protein-packed and budget-friendly Mexican-inspired meal",
+            ingredients: ["black beans", "tortillas", "cheese", "bell peppers", "onions", "cumin"],
+            servings: 3,
+            prepTime: "15 minutes", 
+            estimatedCost: 5.75,
+            costPerServing: 1.92,
+            nutrition: {
+              calories: 380,
+              protein: "16g",
+              carbs: "52g",
+              fat: "14g"
+            },
+            dietaryTags: ["vegetarian"],
+            cuisineType: "mexican",
+            difficulty: "easy"
+          },
+          {
+            id: "recipe-4",
+            name: "Vegetarian Pasta Primavera",
+            description: "Fresh seasonal vegetables with pasta in a light herb sauce",
+            ingredients: ["pasta", "bell peppers", "zucchini", "cherry tomatoes", "olive oil", "garlic", "herbs"],
+            servings: 4,
+            prepTime: "25 minutes",
+            estimatedCost: 7.00,
+            costPerServing: 1.75,
+            nutrition: {
+              calories: 350,
+              protein: "12g",
+              carbs: "58g",
+              fat: "8g"
+            },
+            dietaryTags: ["vegetarian"],
+            cuisineType: "italian",
+            difficulty: "easy"
+          },
+          {
+            id: "recipe-5",
+            name: "Baked Salmon with Quinoa",
+            description: "Healthy omega-3 rich salmon served with protein-packed quinoa",
+            ingredients: ["salmon fillet", "quinoa", "broccoli", "lemon", "olive oil", "herbs"],
+            servings: 2,
+            prepTime: "30 minutes",
+            estimatedCost: 12.00,
+            costPerServing: 6.00,
+            nutrition: {
+              calories: 480,
+              protein: "35g",
+              carbs: "32g",
+              fat: "22g"
+            },
+            dietaryTags: [],
+            cuisineType: "american",
+            difficulty: "medium"
+          }
+        ];
+      }
 
       // Filter recipes based on user preferences and allergies
-      const filteredRecipes = mockRecipes.filter(recipe => {
+      const filteredRecipes = recipes.filter(recipe => {
         // Check budget constraint
         const budgetLimit = maxBudget || (user.weeklyBudget ? user.weeklyBudget / 7 / user.familySize : 10);
         if (recipe.costPerServing > budgetLimit) return false;
@@ -462,7 +525,7 @@ export const getSmartRecipeRecommendations = tool({
 
         // Bonus for preferred ingredients
         const prefMatches = recipe.ingredients.filter(ing => 
-          preferredIngredients.some(pref => ing.toLowerCase().includes(pref.toLowerCase()))
+          preferredIngredients.some((pref: string) => ing.toLowerCase().includes(pref.toLowerCase()))
         );
         score += prefMatches.length * 3;
 
@@ -497,7 +560,7 @@ export const getSmartRecipeRecommendations = tool({
           appliedAllergies: allergies,
           budgetPerServing: maxBudget || (user.weeklyBudget ? user.weeklyBudget / 7 / user.familySize : null),
         },
-        message: `Found ${topRecipes.length} personalized recipes perfect for you!`,
+        message: `Found ${topRecipes.length} personalized recipes perfect for you!${usingApiData ? ' (Fresh recipe data from our database)' : ' (Using curated recommendations)'}`,
       };
     } catch (error) {
       return {
